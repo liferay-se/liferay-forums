@@ -1,0 +1,38 @@
+// SPDX-License-Identifier: LGPL-2.1-or-later
+//
+// The Spring Boot stack this workspace's microservice runs, applied by its
+// build.gradle. A copy of liferay-utility-accelerator's script, which
+// liferay-crm, liferay-ai, liferay-coveo and liferay-forums also keep: the five
+// differ only above the next paragraph, so change them together.
+//
+// Spring Boot itself is gradle.properties' springBootVersion, which also sets
+// each buildscript's spring-boot-gradle-plugin (the jar's launcher). Without
+// the rule below the runtime was not what any build.gradle declared: Liferay's
+// client-extension util asks for its four starters at its own Boot version
+// (3.5.14 in util 1.0.8) and Gradle takes the highest version requested, so a
+// service declaring 3.4.2 or 2.7.18 ran 3.5.14 anyway. Every Spring Boot
+// artifact now resolves to springBootVersion, wherever it is requested from
+// (the util, liferay-ai's core, a starter declared here).
+//
+// Spring Boot 3.5's open-source support ended on 2026-06-30, with 3.5.16; Spring
+// Framework 6.2.19 and Spring Security 6.5.11 are the last open-source patches
+// under it. The libraries below kept patching the lines Boot 3.5 chose, so they
+// are pinned to those patch releases, each fixing advisories in the version
+// Boot 3.5.16 brings (Tomcat 10.1.55, Netty 4.1.135, Jackson 2.21.4, log4j
+// 2.24.3). Raise one only within its line, and re-run the advisory check.
+configurations.configureEach {
+	resolutionStrategy.eachDependency {
+		if (requested.group == "org.springframework.boot") {
+			useVersion springBootVersion
+		}
+		else if (requested.group == "org.apache.tomcat.embed") {
+			useVersion "10.1.60"
+		}
+	}
+}
+
+dependencies {
+	implementation platform(group: "com.fasterxml.jackson", name: "jackson-bom", version: "2.21.7")
+	implementation platform(group: "io.netty", name: "netty-bom", version: "4.1.139.Final")
+	implementation platform(group: "org.apache.logging.log4j", name: "log4j-bom", version: "2.25.5")
+}
