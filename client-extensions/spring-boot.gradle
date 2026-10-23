@@ -2,8 +2,9 @@
 //
 // The Spring Boot stack this workspace's microservice runs, applied by its
 // build.gradle. A copy of liferay-utility-accelerator's script, which
-// liferay-crm, liferay-ai, liferay-coveo and liferay-forums also keep: the five
-// differ only above the next paragraph, so change them together.
+// liferay-crm, liferay-ai, liferay-coveo, liferay-forums and liferay-stripe
+// also keep: the six differ only above the next paragraph, so change them
+// together.
 //
 // Spring Boot itself is gradle.properties' springBootVersion, which also sets
 // each buildscript's spring-boot-gradle-plugin (the jar's launcher). Without
