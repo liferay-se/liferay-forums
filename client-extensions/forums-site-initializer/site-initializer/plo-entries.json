@@ -84,10 +84,6 @@
 		"value": "{\"en_US\": \"Unable to load categories.\"}"
 	},
 	{
-		"key": "press-backspace-to-delete-the-current-row",
-		"value": "{\"en_US\": \"Press backspace to delete the current row.\"}"
-	},
-	{
 		"key": "post-a-reply",
 		"value": "{\"en_US\": \"Post a Reply\"}"
 	},
@@ -158,14 +154,6 @@
 	{
 		"key": "view-the-solution",
 		"value": "{\"en_US\": \"View the Solution\"}"
-	},
-	{
-		"key": "go-to-x",
-		"value": "{\"en_US\": \"Go to {0}\"}"
-	},
-	{
-		"key": "comment",
-		"value": "{\"en_US\": \"Comment\"}"
 	},
 	{
 		"key": "no-message-selected",
@@ -284,14 +272,6 @@
 		"value": "{\"en_US\": \"Solved\"}"
 	},
 	{
-		"key": "x-reply",
-		"value": "{\"en_US\": \"{0} reply\"}"
-	},
-	{
-		"key": "x-replies",
-		"value": "{\"en_US\": \"{0} replies\"}"
-	},
-	{
 		"key": "just-now",
 		"value": "{\"en_US\": \"just now\"}"
 	},
@@ -392,14 +372,6 @@
 		"value": "{\"en_US\": \"Subscribe to this message\"}"
 	},
 	{
-		"key": "tags",
-		"value": "{\"en_US\": \"Tags\"}"
-	},
-	{
-		"key": "select-tags",
-		"value": "{\"en_US\": \"Select Tags\"}"
-	},
-	{
 		"key": "message-pagination",
 		"value": "{\"en_US\": \"Message Pagination\"}"
 	},
@@ -412,24 +384,8 @@
 		"value": "{\"en_US\": \"Moderation Pagination\"}"
 	},
 	{
-		"key": "attach-files",
-		"value": "{\"en_US\": \"Attach Files\"}"
-	},
-	{
-		"key": "attachments",
-		"value": "{\"en_US\": \"Attachments\"}"
-	},
-	{
-		"key": "remove",
-		"value": "{\"en_US\": \"Remove\"}"
-	},
-	{
 		"key": "the-file-is-too-large",
 		"value": "{\"en_US\": \"The file is too large (10 MB maximum).\"}"
-	},
-	{
-		"key": "download",
-		"value": "{\"en_US\": \"Download\"}"
 	},
 	{
 		"key": "remove-file-x",
@@ -440,24 +396,12 @@
 		"value": "{\"en_US\": \"Could not download the file. Please try again.\"}"
 	},
 	{
-		"key": "priority",
-		"value": "{\"en_US\": \"Priority\"}"
-	},
-	{
-		"key": "none",
-		"value": "{\"en_US\": \"None\"}"
-	},
-	{
 		"key": "urgent",
 		"value": "{\"en_US\": \"Urgent\"}"
 	},
 	{
 		"key": "sticky",
 		"value": "{\"en_US\": \"Sticky\"}"
-	},
-	{
-		"key": "announcement",
-		"value": "{\"en_US\": \"Announcement\"}"
 	},
 	{
 		"key": "no-users-found",
