@@ -36,7 +36,7 @@
 									[#if cat.categoryName?has_content]
 										${cat.categoryName?html}
 									[#else]
-										${languageUtil.get(locale, "unnamed-category")}
+										${languageUtil.get(locale, "forums-unnamed-category")}
 									[/#if]
 								</div>
 								<p class="card-text text-secondary forums-category-grid__card-desc">${(cat.categoryDescription!"")?html}</p>
@@ -51,7 +51,7 @@
 				[/#list]
 			[#else]
 				<div class="col-12 text-center text-secondary py-5">
-					${languageUtil.get(locale, "no-categories-found")}
+					${languageUtil.get(locale, "forums-no-categories-found")}
 				</div>
 			[/#if]
 		</div>

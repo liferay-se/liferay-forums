@@ -1,26 +1,26 @@
 <!-- SPDX-License-Identifier: LGPL-2.1-or-later -->
 [#assign forumsNewDiscussionURL = (themeDisplay.getPathFriendlyURLPublic()!"") + (themeDisplay.getScopeGroup().getFriendlyURL()!"") + "/new-discussion" /]
 <div class="forums-message-list" id="forumsMessageList"
-	data-label-all-messages="${languageUtil.get(locale, "all-discussions")}"
+	data-label-all-messages="${languageUtil.get(locale, "forums-all-discussions")}"
 	data-label-category="${languageUtil.get(locale, "category")}"
-	data-label-no-messages="${languageUtil.get(locale, "no-messages-found")}"
-	data-label-untitled-message="${languageUtil.get(locale, "untitled-message")}"
+	data-label-no-messages="${languageUtil.get(locale, "forums-no-messages-found")}"
+	data-label-untitled-message="${languageUtil.get(locale, "forums-untitled-message")}"
 	data-label-unknown="${languageUtil.get(locale, "unknown")}"
-	data-label-solved="${languageUtil.get(locale, "solved")}"
+	data-label-solved="${languageUtil.get(locale, "forums-solved")}"
 	data-label-delete="${languageUtil.get(locale, "delete")}"
-	data-label-unable-to-load="${languageUtil.get(locale, "unable-to-load-messages")}"
-	data-label-delete-topic="${languageUtil.get(locale, "delete-topic")}"
-	data-label-confirm-delete-topic="${languageUtil.get(locale, "confirm-delete-topic")}"
+	data-label-unable-to-load="${languageUtil.get(locale, "forums-unable-to-load-messages")}"
+	data-label-delete-topic="${languageUtil.get(locale, "forums-delete-topic")}"
+	data-label-confirm-delete-topic="${languageUtil.get(locale, "forums-confirm-delete-topic")}"
 	data-label-cancel="${languageUtil.get(locale, "cancel")}"
-	data-label-just-now="${languageUtil.get(locale, "just-now")}"
+	data-label-just-now="${languageUtil.get(locale, "forums-just-now")}"
 	data-label-x-minutes-ago="${languageUtil.get(locale, "x-minutes-ago")}"
 	data-label-x-hours-ago="${languageUtil.get(locale, "x-hours-ago")}"
-	data-label-x-days-ago="${languageUtil.get(locale, "x-days-ago")}"
+	data-label-x-days-ago="${languageUtil.get(locale, "forums-x-days-ago")}"
 	data-label-x-reply="${languageUtil.get(locale, "x-reply")}"
 	data-label-x-replies="${languageUtil.get(locale, "x-replies")}"
-	data-label-flagged="${languageUtil.get(locale, "flagged")}"
-	data-label-urgent="${languageUtil.get(locale, "urgent")}"
-	data-label-sticky="${languageUtil.get(locale, "sticky")}"
+	data-label-flagged="${languageUtil.get(locale, "forums-flagged")}"
+	data-label-urgent="${languageUtil.get(locale, "forums-urgent")}"
+	data-label-sticky="${languageUtil.get(locale, "forums-sticky")}"
 	data-label-announcement="${languageUtil.get(locale, "announcement")}"
 	data-label-views="${languageUtil.get(locale, "views")}"
 	data-label-all-categories="${languageUtil.get(locale, "all-categories")}"
@@ -32,13 +32,13 @@
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb" id="forumsMessageListBreadcrumb">
 				<li class="breadcrumb-item"><a class="breadcrumb-link" id="forumsMessageListBreadcrumbHome" href="#">${languageUtil.get(locale, "forums")}</a></li>
-				<li class="breadcrumb-item active"><a class="breadcrumb-link" aria-current="page" href="#" id="forumsMessageListCategoryName">${languageUtil.get(locale, "all-discussions")}</a></li>
+				<li class="breadcrumb-item active"><a class="breadcrumb-link" aria-current="page" href="#" id="forumsMessageListCategoryName">${languageUtil.get(locale, "forums-all-discussions")}</a></li>
 			</ol>
 		</nav>
 
 		<!-- Header row: Category name + search + CTA -->
 		<div class="forums-message-list__header">
-			<h2 class="mb-0 text-dark" id="forumsMessageListHeading">${languageUtil.get(locale, "all-discussions")}</h2>
+			<h2 class="mb-0 text-dark" id="forumsMessageListHeading">${languageUtil.get(locale, "forums-all-discussions")}</h2>
 			<div class="forums-message-list__actions">
 				<select class="form-control forums-message-list__category-filter" id="forumsMessageListCategoryFilter" aria-label="${languageUtil.get(locale, "filter-by-category")}">
 					<option value="">${languageUtil.get(locale, "all-categories")}</option>
@@ -55,7 +55,7 @@
 						</div>
 					</div>
 				</div>
-				<a href="${forumsNewDiscussionURL}" class="btn btn-primary text-nowrap" id="forumsMessageListAskBtn" style="display: none;">${languageUtil.get(locale, "new-forum-message")}</a>
+				<a href="${forumsNewDiscussionURL}" class="btn btn-primary text-nowrap" id="forumsMessageListAskBtn" style="display: none;">${languageUtil.get(locale, "forums-new-forum-message")}</a>
 			</div>
 		</div>
 
@@ -105,7 +105,7 @@
 		</div>
 
 		<!-- Pagination -->
-		<nav aria-label="${languageUtil.get(locale, "message-pagination")}" id="forumsMessageListPagination" class="mt-4" style="display:none;">
+		<nav aria-label="${languageUtil.get(locale, "forums-message-pagination")}" id="forumsMessageListPagination" class="mt-4" style="display:none;">
 			<ul class="pagination justify-content-center" id="forumsMessageListPaginationUl">
 			</ul>
 		</nav>

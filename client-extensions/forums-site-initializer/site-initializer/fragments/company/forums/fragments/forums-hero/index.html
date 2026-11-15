@@ -107,8 +107,8 @@
 					[#if showSolutions || showDiscussions || showMessages || showParticipants]
 						<div class="forums-hero__stats mb-4">
 							<div class="row justify-content-center">
-								[#if showSolutions][@stat solutionsData languageUtil.get(locale, "solutions") /][/#if]
-								[#if showDiscussions][@stat threadsData languageUtil.get(locale, "discussions") /][/#if]
+								[#if showSolutions][@stat solutionsData languageUtil.get(locale, "forums-solutions") /][/#if]
+								[#if showDiscussions][@stat threadsData languageUtil.get(locale, "forums-discussions") /][/#if]
 								[#if showMessages][@stat messagesData languageUtil.get(locale, "messages") /][/#if]
 								[#if showParticipants][@stat participantsData languageUtil.get(locale, "participants") /][/#if]
 							</div>
@@ -120,7 +120,7 @@
 					     permission in a normal page render. --]
 					[#if showNewDiscussionButton]
 						<a href="${sitePrefix}/new-discussion" class="btn btn-primary btn-lg" id="forumsHeroAskBtn" style="display: none;">
-							${languageUtil.get(locale, "new-forum-message")}
+							${languageUtil.get(locale, "forums-new-forum-message")}
 						</a>
 					[/#if]
 				</div>

@@ -5,7 +5,7 @@
 [#macro subjectGroup]
 	<div class="form-group" id="forumsMessageComposerSubjectGroup">
 		<label for="forumsMessageComposerSubject" class="font-weight-bold">${languageUtil.get(locale, "subject")}</label>
-		<input type="text" class="form-control" id="forumsMessageComposerSubject" placeholder="${languageUtil.get(locale, "enter-a-descriptive-title")}" required maxlength="255" aria-describedby="forumsMessageComposerSubjectError">
+		<input type="text" class="form-control" id="forumsMessageComposerSubject" placeholder="${languageUtil.get(locale, "forums-enter-a-descriptive-title")}" required maxlength="255" aria-describedby="forumsMessageComposerSubjectError">
 		<div class="invalid-feedback" id="forumsMessageComposerSubjectError">${languageUtil.get(locale, "please-enter-a-subject")}</div>
 	</div>
 [/#macro]
@@ -14,7 +14,7 @@
 	<div class="form-group" id="forumsMessageComposerCategoryGroup">
 		<label for="forumsMessageComposerCategory" class="font-weight-bold">${languageUtil.get(locale, "category")}</label>
 		<select class="form-control" id="forumsMessageComposerCategory" required aria-describedby="forumsMessageComposerCategoryError">
-			<option value="">${languageUtil.get(locale, "select-a-category")}</option>
+			<option value="">${languageUtil.get(locale, "forums-select-a-category")}</option>
 		</select>
 		<div class="invalid-feedback" id="forumsMessageComposerCategoryError">${languageUtil.get(locale, "please-select-a-category")}</div>
 	</div>
@@ -50,7 +50,7 @@
 [#macro questionGroup]
 	<div class="form-group form-check" id="forumsMessageComposerQuestionGroup">
 		<input type="checkbox" class="form-check-input" id="forumsMessageComposerQuestion" checked>
-		<label class="form-check-label" for="forumsMessageComposerQuestion">${languageUtil.get(locale, "mark-as-question")}</label>
+		<label class="form-check-label" for="forumsMessageComposerQuestion">${languageUtil.get(locale, "forums-mark-as-question")}</label>
 	</div>
 [/#macro]
 
@@ -63,8 +63,8 @@
 		<select class="form-control" id="forumsMessageComposerPriority">
 			<option value="0" selected>${languageUtil.get(locale, "none")}</option>
 			<option value="1">${languageUtil.get(locale, "announcement")}</option>
-			<option value="2">${languageUtil.get(locale, "sticky")}</option>
-			<option value="3">${languageUtil.get(locale, "urgent")}</option>
+			<option value="2">${languageUtil.get(locale, "forums-sticky")}</option>
+			<option value="3">${languageUtil.get(locale, "forums-urgent")}</option>
 		</select>
 	</div>
 [/#macro]
@@ -72,7 +72,7 @@
 [#macro subscribeGroup]
 	<div class="form-group form-check" id="forumsMessageComposerSubscribeGroup">
 		<input type="checkbox" class="form-check-input" id="forumsMessageComposerSubscribe" checked>
-		<label class="form-check-label" for="forumsMessageComposerSubscribe">${languageUtil.get(locale, "subscribe-to-this-message")}</label>
+		<label class="form-check-label" for="forumsMessageComposerSubscribe">${languageUtil.get(locale, "forums-subscribe-to-this-message")}</label>
 	</div>
 [/#macro]
 
@@ -82,7 +82,7 @@
 		<div id="${fragmentElementId}-forumsMessageComposerBody-wrapper" class="forums-message-composer__editor-wrapper">
 			[@liferay_layout["render-editor"] content="" name=fragmentElementId + "-forumsMessageComposerBody" label="" /]
 		</div>
-		<div class="invalid-feedback" id="forumsMessageComposerBodyError" style="display:none;" role="alert">${languageUtil.get(locale, "please-enter-some-content")}</div>
+		<div class="invalid-feedback" id="forumsMessageComposerBodyError" style="display:none;" role="alert">${languageUtil.get(locale, "forums-please-enter-some-content")}</div>
 	</div>
 [/#macro]
 
@@ -103,7 +103,7 @@
 
 [#macro statusAlerts]
 	<div class="alert alert-success mt-3" id="forumsMessageComposerSuccess" style="display:none;" aria-live="polite">
-		${languageUtil.get(locale, "post-submitted-successfully")}
+		${languageUtil.get(locale, "forums-post-submitted-successfully")}
 	</div>
 	<div class="alert alert-danger mt-3" id="forumsMessageComposerError" style="display:none;" role="alert">
 		${languageUtil.get(locale, "an-error-occurred")}
@@ -113,26 +113,26 @@
 <div class="forums-message-composer forums-message-composer--${formMode}" id="forumsMessageComposer"
 	data-form-mode="${formMode}"
 	data-label-new-forum-message="New Discussion"
-	data-label-post-a-reply="${languageUtil.get(locale, "post-a-reply")}"
+	data-label-post-a-reply="${languageUtil.get(locale, "forums-post-a-reply")}"
 	data-label-details="${languageUtil.get(locale, "details")}"
-	data-label-your-reply="${languageUtil.get(locale, "your-reply")}"
-	data-label-describe-question="${languageUtil.get(locale, "describe-your-question")}"
-	data-label-write-reply="${languageUtil.get(locale, "write-your-reply")}"
+	data-label-your-reply="${languageUtil.get(locale, "forums-your-reply")}"
+	data-label-describe-question="${languageUtil.get(locale, "forums-describe-your-question")}"
+	data-label-write-reply="${languageUtil.get(locale, "forums-write-your-reply")}"
 	data-label-post="${languageUtil.get(locale, "post")}"
-	data-label-posting="${languageUtil.get(locale, "posting")}"
-	data-label-unnamed="${languageUtil.get(locale, "unnamed")}"
-	data-label-reply-posted="${languageUtil.get(locale, "reply-posted-successfully")}"
-	data-label-question-posted="${languageUtil.get(locale, "your-question-has-been-posted")}"
+	data-label-posting="${languageUtil.get(locale, "forums-posting")}"
+	data-label-unnamed="${languageUtil.get(locale, "forums-unnamed")}"
+	data-label-reply-posted="${languageUtil.get(locale, "forums-reply-posted-successfully")}"
+	data-label-question-posted="${languageUtil.get(locale, "forums-your-question-has-been-posted")}"
 	data-label-save="${languageUtil.get(locale, "save")}"
 	data-label-edit-topic="${languageUtil.get(locale, "edit-topic")}"
-	data-label-edit-reply="${languageUtil.get(locale, "edit-reply")}"
+	data-label-edit-reply="${languageUtil.get(locale, "forums-edit-reply")}"
 	data-label-success="${languageUtil.get(locale, "success")}"
-	data-label-subscribe-to-this-message="${languageUtil.get(locale, "subscribe-to-this-message")}"
+	data-label-subscribe-to-this-message="${languageUtil.get(locale, "forums-subscribe-to-this-message")}"
 	data-label-remove="${languageUtil.get(locale, "remove")}"
-	data-label-remove-attachment="${languageUtil.get(locale, "remove-file-x")}"
-	data-label-file-too-large="${languageUtil.get(locale, "the-file-is-too-large")}"
-	data-label-mention-no-users="${languageUtil.get(locale, "no-users-found")}"
-	data-label-banned-warning="${languageUtil.get(locale, "your-account-has-been-banned-from-participating-in-the-forums")}"
+	data-label-remove-attachment="${languageUtil.get(locale, "forums-remove-file-x")}"
+	data-label-file-too-large="${languageUtil.get(locale, "forums-the-file-is-too-large")}"
+	data-label-mention-no-users="${languageUtil.get(locale, "forums-no-users-found")}"
+	data-label-banned-warning="${languageUtil.get(locale, "forums-your-account-has-been-banned-from-participating-in-the-forums")}"
 	data-label-save-changes="${languageUtil.get(locale, "save")}"
 	data-label-new-forum-thread="${languageUtil.get(locale, "forums-new-forum-thread")}"
 	data-label-display-page-not-configured="${languageUtil.get(locale, "forums-message-created-display-page-not-configured")}">
