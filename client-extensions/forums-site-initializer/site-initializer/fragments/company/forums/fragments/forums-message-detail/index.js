@@ -48,8 +48,8 @@ if (messageDetail) {
 	/* HATEOAS: hide write-action buttons by default; show after API confirms permission */
 	if (replyBtn) {
 		replyBtn.style.display = 'none';
-		replyBtn.setAttribute('title', messageDetail.dataset.labelComment || 'Comment');
-		replyBtn.setAttribute('aria-label', messageDetail.dataset.labelComment || 'Comment');
+		replyBtn.setAttribute('title', messageDetail.dataset.labelComment);
+		replyBtn.setAttribute('aria-label', messageDetail.dataset.labelComment);
 	}
 	if (flagBtn) flagBtn.style.display = 'none';
 
@@ -176,7 +176,7 @@ if (messageDetail) {
 	var targetReplyId = replyId || null;
 	var skeletonShownAt = Date.now();
 	if (!messageId) {
-		if (loadingEl) loadingEl.innerHTML = '<div class="forums-message-list__empty text-secondary text-center py-5">' + (messageDetail.dataset.labelNoMessage || 'No message selected.') + '</div>';
+		if (loadingEl) loadingEl.innerHTML = '<div class="forums-message-list__empty text-secondary text-center py-5">' + (messageDetail.dataset.labelNoMessage) + '</div>';
 		return;
 	}
 
@@ -220,10 +220,10 @@ if (messageDetail) {
 		var now = Date.now();
 		var then = new Date(dateStr).getTime();
 		var diff = Math.floor((now - then) / 1000);
-		if (diff < 60) return messageDetail.dataset.labelJustNow || 'just now';
-		if (diff < 3600) return (messageDetail.dataset.labelXMinutesAgo || '{0}m ago').replace('{0}', Math.floor(diff / 60));
-		if (diff < 86400) return (messageDetail.dataset.labelXHoursAgo || '{0}h ago').replace('{0}', Math.floor(diff / 3600));
-		if (diff < 2592000) return (messageDetail.dataset.labelXDaysAgo || '{0}d ago').replace('{0}', Math.floor(diff / 86400));
+		if (diff < 60) return messageDetail.dataset.labelJustNow;
+		if (diff < 3600) return (messageDetail.dataset.labelXMinutesAgo).replace('{0}', Math.floor(diff / 60));
+		if (diff < 86400) return (messageDetail.dataset.labelXHoursAgo).replace('{0}', Math.floor(diff / 3600));
+		if (diff < 2592000) return (messageDetail.dataset.labelXDaysAgo).replace('{0}', Math.floor(diff / 86400));
 		return new Date(dateStr).toLocaleDateString();
 	}
 
@@ -350,8 +350,8 @@ if (messageDetail) {
 					if (count == null) return;
 					var rank = rankLabel(count);
 					var tmpl = count === 1
-						? (messageDetail.dataset.labelXPost || '{0} post')
-						: (messageDetail.dataset.labelXPosts || '{0} posts');
+						? (messageDetail.dataset.labelXPost)
+						: (messageDetail.dataset.labelXPosts);
 					var posts = tmpl.replace('{0}', count);
 					el.textContent = (rank ? rank + ' · ' : '') + posts;
 					el.style.display = '';
@@ -376,15 +376,15 @@ if (messageDetail) {
 	   Sticky|pin|2.0, Announcement|comments|1.0). Values <= 0, missing, or
 	   unknown render nothing, matching MBUtil.getThreadPriority. */
 	var PRIORITY_LEVELS = {
-		3: { icon: 'bolt', labelKey: 'labelUrgent', fallback: 'Urgent', textClass: 'text-danger' },
-		2: { icon: 'pin', labelKey: 'labelSticky', fallback: 'Sticky', textClass: 'text-warning' },
-		1: { icon: 'comments', labelKey: 'labelAnnouncement', fallback: 'Announcement', textClass: 'text-info' }
+		3: { icon: 'bolt', labelKey: 'labelUrgent', textClass: 'text-danger' },
+		2: { icon: 'pin', labelKey: 'labelSticky', textClass: 'text-warning' },
+		1: { icon: 'comments', labelKey: 'labelAnnouncement', textClass: 'text-info' }
 	};
 
 	function priorityBadge(priority) {
 		var level = PRIORITY_LEVELS[Math.round(parseFloat(priority)) || 0];
 		if (!level) return '';
-		var label = Liferay.Util.escapeHTML(messageDetail.dataset[level.labelKey] || level.fallback);
+		var label = Liferay.Util.escapeHTML(messageDetail.dataset[level.labelKey]);
 		return '<span class="forums-message-detail__priority-badge ' + level.textClass + '" title="' + label + '">'
 			+ '<svg class="lexicon-icon lexicon-icon-' + level.icon + '" role="presentation"><use href="' + clayIconsUrl + '#' + level.icon + '"></use></svg> '
 			+ label + '</span>';
@@ -395,7 +395,7 @@ if (messageDetail) {
 	function renderReplyCard(msg, isSolution, depth) {
 		depth = depth || 0;
 		var creator = msg.creator || {};
-		var name = displayName(creator) || messageDetail.dataset.labelUnknown || 'Unknown';
+		var name = displayName(creator) || messageDetail.dataset.labelUnknown;
 		var body = msg.body || '';
 		var dateFull = fullDateTime(msg.dateCreated);
 		var date = '<time datetime="' + msg.dateCreated + '" title="' + dateFull + '" aria-label="' + dateFull + '">' + timeAgo(msg.dateCreated) + '</time>';
@@ -413,7 +413,7 @@ if (messageDetail) {
 		var hasEditAction = !!(msg.actions && (msg.actions['update'] || msg.actions['patch'] || msg.actions['PUT']));
 		var hasDeleteAction = !!(msg.actions && msg.actions['delete']);
 		var hasOptions = hasEditAction || hasDeleteAction;
-		var optionsLabel = messageDetail.dataset.labelOptions || 'Options';
+		var optionsLabel = messageDetail.dataset.labelOptions;
 		/* Lock the accepted answer: once one reply is marked, only that reply
 		   keeps the toggle (so it can be unmarked). Hide the button on all
 		   other replies — the user must unmark the current accepted answer
@@ -433,11 +433,11 @@ if (messageDetail) {
 				<div class="autofit-col autofit-col-expand forums-message-detail__reply-content">
 					<div class="forums-message-detail__reply-header">
 						<span class="text-dark font-weight-bold">${Liferay.Util.escapeHTML(name)}</span>
-						${isAuthor ? `<span class="label forums-message-detail__author-badge">${messageDetail.dataset.labelAuthor || 'Author'}</span>` : ''}
+						${isAuthor ? `<span class="label forums-message-detail__author-badge">${messageDetail.dataset.labelAuthor}</span>` : ''}
 						<span class="text-secondary small">${date}</span>
 						${creator.id ? `<span class="text-secondary small forums-message-detail__rank" data-forums-rank-user="${creator.id}" style="display:none"></span>` : ''}
 						${isSolution ? (function() {
-							var tmpl = messageDetail.dataset.labelAnswerSelectedBy || 'Answer selected by {0}';
+							var tmpl = messageDetail.dataset.labelAnswerSelectedBy;
 							var parts = tmpl.split('{0}');
 							return `<span class="small forums-message-detail__answer-selected-by"><svg class="lexicon-icon lexicon-icon-check-circle-full" role="presentation"><use href="${clayIconsUrl}#check-circle-full"></use></svg>${Liferay.Util.escapeHTML(parts[0] || '')}<span class="forums-message-detail__answer-selected-by-name">${Liferay.Util.escapeHTML(opAuthorName)}</span>${Liferay.Util.escapeHTML(parts[1] || '')}</span>`;
 						})() : ''}
@@ -445,26 +445,26 @@ if (messageDetail) {
 					<div class="forums-message-detail__reply-body">${body}</div>
 					${renderAttachments(msg)}
 					<div class="forums-message-detail__reply-actions">
-						${canReply ? `<button class="btn btn-outline-primary btn-sm" type="button" data-forums-compose data-forums-reply data-forums-message-id="${msg.r_threadMessages_c_forumThreadId}" data-forums-parent-id="${msg.id}">${messageDetail.dataset.labelReply || 'Reply'}</button>` : ''}
+						${canReply ? `<button class="btn btn-outline-primary btn-sm" type="button" data-forums-compose data-forums-reply data-forums-message-id="${msg.r_threadMessages_c_forumThreadId}" data-forums-parent-id="${msg.id}">${messageDetail.dataset.labelReply}</button>` : ''}
 						${hasOptions ? `<div class="dropdown forums-message-detail__reply-options">
 							<button class="btn btn-monospaced btn-sm btn-outline-borderless btn-outline-secondary dropdown-toggle" type="button" id="forumsReplyOptions_${msg.id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="${optionsLabel}" title="${optionsLabel}">
 								<svg class="lexicon-icon lexicon-icon-ellipsis-v" role="presentation"><use href="${clayIconsUrl}#ellipsis-v"></use></svg>
 							</button>
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="forumsReplyOptions_${msg.id}">
-								${hasEditAction ? `<a class="dropdown-item forums-edit-reply-btn" href="#" data-message-id="${msg.id}">${messageDetail.dataset.labelEditReply || 'Edit Reply'}</a>` : ''}
-								${hasDeleteAction ? `<a class="dropdown-item text-danger forums-delete-btn" href="#" data-delete-url="${msg.actions['delete'].href}">${messageDetail.dataset.labelDeleteReply || 'Delete Reply'}</a>` : ''}
+								${hasEditAction ? `<a class="dropdown-item forums-edit-reply-btn" href="#" data-message-id="${msg.id}">${messageDetail.dataset.labelEditReply}</a>` : ''}
+								${hasDeleteAction ? `<a class="dropdown-item text-danger forums-delete-btn" href="#" data-delete-url="${msg.actions['delete'].href}">${messageDetail.dataset.labelDeleteReply}</a>` : ''}
 							</div>
 						</div>` : ''}
 						<div class="align-items-center d-inline-flex text-secondary forums-vote" data-message-id="${msg.id}">
-							<button class="btn-thumbs-up btn btn-monospaced btn-outline-borderless btn-sm btn-outline-secondary forums-vote__btn forums-vote__btn--up${upActive}" type="button" aria-pressed="${isUpPressed}"${canVote ? ` data-vote-dir="up" data-message-id="${msg.id}"` : ' disabled'} title="${messageDetail.dataset.labelUpvote || 'Upvote'}">
+							<button class="btn-thumbs-up btn btn-monospaced btn-outline-borderless btn-sm btn-outline-secondary forums-vote__btn forums-vote__btn--up${upActive}" type="button" aria-pressed="${isUpPressed}"${canVote ? ` data-vote-dir="up" data-message-id="${msg.id}"` : ' disabled'} title="${messageDetail.dataset.labelUpvote}">
 								<svg class="lexicon-icon lexicon-icon-${upIcon}" role="presentation"><use href="${clayIconsUrl}#${upIcon}"></use></svg>
 							</button>
 							<span class="font-weight-bold p-1 forums-vote__score" data-vote-score="${msg.id}">${score}</span>
-							<button class="btn-thumbs-down btn btn-monospaced btn-outline-borderless btn-sm btn-outline-secondary forums-vote__btn forums-vote__btn--down${downActive}" type="button" aria-pressed="${isDownPressed}"${canVote ? ` data-vote-dir="down" data-message-id="${msg.id}"` : ' disabled'} title="${messageDetail.dataset.labelDownvote || 'Downvote'}">
+							<button class="btn-thumbs-down btn btn-monospaced btn-outline-borderless btn-sm btn-outline-secondary forums-vote__btn forums-vote__btn--down${downActive}" type="button" aria-pressed="${isDownPressed}"${canVote ? ` data-vote-dir="down" data-message-id="${msg.id}"` : ' disabled'} title="${messageDetail.dataset.labelDownvote}">
 								<svg class="lexicon-icon lexicon-icon-${downIcon}" role="presentation"><use href="${clayIconsUrl}#${downIcon}"></use></svg>
 							</button>
 						</div>
-						${canMarkAnswer ? `<button class="btn btn-sm ${isSolution ? 'btn-success' : 'btn-outline-secondary'} forums-answer-btn" data-answer-message-id="${msg.id}" data-is-answer="${isSolution ? 'true' : 'false'}">${isSolution ? `&#10003; ${messageDetail.dataset.labelAccepted || 'Accepted'}` : (messageDetail.dataset.labelMarkAsAnswer || 'Mark as Answer')}</button>` : ''}
+						${canMarkAnswer ? `<button class="btn btn-sm ${isSolution ? 'btn-success' : 'btn-outline-secondary'} forums-answer-btn" data-answer-message-id="${msg.id}" data-is-answer="${isSolution ? 'true' : 'false'}">${isSolution ? `&#10003; ${messageDetail.dataset.labelAccepted}` : (messageDetail.dataset.labelMarkAsAnswer)}</button>` : ''}
 					</div>
 				</div>
 			</div>
@@ -491,7 +491,7 @@ if (messageDetail) {
 		   the Edit dialog (forums-message-composer), alongside the rest of the post. */
 		var chips = files.map(function(att) {
 			var file = att.file || {};
-			var name = file.name || (file.link && file.link.label) || (messageDetail.dataset.labelDownload || 'Download');
+			var name = file.name || (file.link && file.link.label) || (messageDetail.dataset.labelDownload);
 			var safeName = Liferay.Util.escapeHTML(name);
 			return '<span class="forums-message-detail__attachment" data-attachment-id="' + att.id + '">' +
 				'<button type="button" class="btn btn-outline-secondary btn-sm forums-attachment-download" data-attachment-id="' + att.id + '" data-attachment-name="' + safeName + '" title="' + safeName + '">' +
@@ -812,8 +812,8 @@ if (messageDetail) {
 					<div class="modal-footer">
 						<div class="modal-item-last">
 							<div class="btn-group-spaced" role="group">
-								<button class="btn btn-secondary forums-delete-modal-close" type="button">${messageDetail.dataset.labelCancel || 'Cancel'}</button>
-								<button class="btn btn-danger" type="button" id="forumsDeleteModalConfirmBtn">${messageDetail.dataset.labelDelete || 'Delete'}</button>
+								<button class="btn btn-secondary forums-delete-modal-close" type="button">${messageDetail.dataset.labelCancel}</button>
+								<button class="btn btn-danger" type="button" id="forumsDeleteModalConfirmBtn">${messageDetail.dataset.labelDelete}</button>
 							</div>
 						</div>
 					</div>
@@ -860,8 +860,8 @@ if (messageDetail) {
 			btn.addEventListener('click', function(e) {
 				e.preventDefault();
 				var isReply = this.closest('.forums-message-detail__reply-card');
-				var title = isReply ? (messageDetail.dataset.labelDeleteReply || 'Delete Reply') : (messageDetail.dataset.labelDeleteTopic || 'Delete Topic');
-				var confirmMsg = isReply ? (messageDetail.dataset.labelConfirmDeleteReply || 'Deleting a reply is an action impossible to revert. It will not be possible to recover it.') : (messageDetail.dataset.labelConfirmDeleteTopic || 'Deleting a topic is an action impossible to revert. All the replies in the topic will be removed and it will not be possible to recover them.');
+				var title = isReply ? (messageDetail.dataset.labelDeleteReply) : (messageDetail.dataset.labelDeleteTopic);
+				var confirmMsg = isReply ? (messageDetail.dataset.labelConfirmDeleteReply) : (messageDetail.dataset.labelConfirmDeleteTopic);
 				
 				var deleteUrl = this.getAttribute('data-delete-url');
 				var btnEl = this;
@@ -953,7 +953,7 @@ if (messageDetail) {
 			console.error('Download attachment error:', err);
 			if (Liferay.Util && Liferay.Util.openToast) {
 				Liferay.Util.openToast({
-					message: messageDetail.dataset.labelCouldNotDownloadFile || 'Could not download the file. Please try again.',
+					message: messageDetail.dataset.labelCouldNotDownloadFile,
 					type: 'danger'
 				});
 			}
@@ -977,7 +977,7 @@ if (messageDetail) {
 			var bannedBanner = document.createElement('div');
 			bannedBanner.className = 'alert alert-danger mt-3';
 			bannedBanner.setAttribute('role', 'alert');
-			bannedBanner.innerHTML = `<span class="alert-indicator"><svg class="lexicon-icon lexicon-icon-warning-full" role="presentation" viewBox="0 0 16 16" fill="currentColor"><path d="M16 14.5L8 1 0 14.5h16zM8 13c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm1-3H7V6h2v4z"/></svg></span><strong class="lead">${messageDetail.dataset.labelBanned || 'Banned'}: </strong>${messageDetail.dataset.labelBannedWarning || 'Your account has been banned from participating in the forums.'}`;
+			bannedBanner.innerHTML = `<span class="alert-indicator"><svg class="lexicon-icon lexicon-icon-warning-full" role="presentation" viewBox="0 0 16 16" fill="currentColor"><path d="M16 14.5L8 1 0 14.5h16zM8 13c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm1-3H7V6h2v4z"/></svg></span><strong class="lead">${messageDetail.dataset.labelBanned}: </strong>${messageDetail.dataset.labelBannedWarning}`;
 			
 			var titleRow = messageDetail.querySelector('.forums-message-detail__title-row');
 			if (titleRow) {
@@ -1018,8 +1018,8 @@ if (messageDetail) {
 
 			if (currentSubscribeUrl) {
 				subscribeBtn.textContent = isSubscribed 
-					? (messageDetail.dataset.labelUnsubscribe || 'Unsubscribe')
-					: (messageDetail.dataset.labelSubscribe || 'Subscribe');
+					? (messageDetail.dataset.labelUnsubscribe)
+					: (messageDetail.dataset.labelSubscribe);
 				subscribeBtn.style.display = '';
 
 				var newSubBtn = subscribeBtn.cloneNode(true);
@@ -1044,19 +1044,19 @@ if (messageDetail) {
 								: currentSubscribeUrl.replace('/unsubscribe', '/subscribe');
 								
 							btn.textContent = isSubscribed 
-								? (messageDetail.dataset.labelUnsubscribe || 'Unsubscribe')
-								: (messageDetail.dataset.labelSubscribe || 'Subscribe');
+								? (messageDetail.dataset.labelUnsubscribe)
+								: (messageDetail.dataset.labelSubscribe);
 							
 							var optionsMenu = btn.closest('.dropdown-menu');
 							if (optionsMenu) optionsMenu.classList.remove('show');
 							
 							if (Liferay.Util && Liferay.Util.openToast) {
 								var toastMsg = isSubscribed 
-									? (messageDetail.dataset.labelSubscribedToast || 'You have been subscribed to this message.') 
-									: (messageDetail.dataset.labelUnsubscribedToast || 'You have been unsubscribed from this message.');
+									? (messageDetail.dataset.labelSubscribedToast) 
+									: (messageDetail.dataset.labelUnsubscribedToast);
 								Liferay.Util.openToast({
 									message: toastMsg,
-									title: messageDetail.dataset.labelSuccess || 'Success',
+									title: messageDetail.dataset.labelSuccess,
 									type: 'success'
 								});
 							}
@@ -1115,7 +1115,7 @@ if (messageDetail) {
 				flaggedBanner.id = 'forumsDetailFlaggedBanner';
 				flaggedBanner.className = 'alert alert-danger mt-3';
 				flaggedBanner.setAttribute('role', 'alert');
-				flaggedBanner.innerHTML = `<span class="alert-indicator"><svg class="lexicon-icon lexicon-icon-warning-full" role="presentation" viewBox="0 0 16 16" fill="currentColor"><path d="M16 14.5L8 1 0 14.5h16zM8 13c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm1-3H7V6h2v4z"/></svg></span><strong class="lead">${messageDetail.dataset.labelFlagged || 'Flagged'}: </strong>${messageDetail.dataset.labelFlaggedWarning || 'This message has been flagged and validated by moderators as inappropriate content.'}`;
+				flaggedBanner.innerHTML = `<span class="alert-indicator"><svg class="lexicon-icon lexicon-icon-warning-full" role="presentation" viewBox="0 0 16 16" fill="currentColor"><path d="M16 14.5L8 1 0 14.5h16zM8 13c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm1-3H7V6h2v4z"/></svg></span><strong class="lead">${messageDetail.dataset.labelFlagged}: </strong>${messageDetail.dataset.labelFlaggedWarning}`;
 				
 				var titleRow = messageDetail.querySelector('.forums-message-detail__title-row');
 				if (titleRow) {
@@ -1126,7 +1126,7 @@ if (messageDetail) {
 			}
 		}
 
-		messageTitleText = msg.messageTitle || messageDetail.dataset.labelUntitledMessage || 'Untitled Message';
+		messageTitleText = msg.messageTitle || messageDetail.dataset.labelUntitledMessage;
 		messageCategoryFK = msg.r_categoryThreads_c_forumCategoryId;
 		messagePriority = msg.priority || 0;
 		messageTagsArray = msg.keywords || [];
@@ -1148,7 +1148,7 @@ if (messageDetail) {
 			})
 			.then(function(r) { return r.json(); })
 			.then(function(cat) {
-				var catName = cat.categoryName || messageDetail.dataset.labelCategory || 'Category';
+				var catName = cat.categoryName || messageDetail.dataset.labelCategory;
 				var messagesHref = sitePrefix + ((typeof configuration !== 'undefined' && configuration.messagesURL) ? configuration.messagesURL : '/forums-messages');
 				var catURL = messagesHref + '?categoryId=' + categoryFK;
 
@@ -1159,7 +1159,7 @@ if (messageDetail) {
 
 				/* Also populate the bottom category link */
 				if (categoryLink) {
-					var labelText = (messageDetail.dataset.labelBackToX || 'Back to {0}').replace('{0}', catName);
+					var labelText = (messageDetail.dataset.labelBackToX).replace('{0}', catName);
 					categoryLink.textContent = labelText;
 					categoryLink.href = catURL;
 					categoryLink.style.display = '';
@@ -1181,7 +1181,7 @@ if (messageDetail) {
 				var items = data.items || [];
 				if (items.length > 0) {
 					existingFlagId = items[0].id;
-					flagBtn.textContent = messageDetail.dataset.labelFlagged || 'Flagged';
+					flagBtn.textContent = messageDetail.dataset.labelFlagged;
 					flagBtn.classList.add('disabled');
 					flagBtn.disabled = true;
 				}
@@ -1193,7 +1193,7 @@ if (messageDetail) {
 		loadMessages();
 	})
 	.catch(function(err) {
-		if (loadingEl) loadingEl.innerHTML = '<div class="forums-message-list__empty text-secondary text-center py-5">' + (messageDetail.dataset.labelUnableToLoadMessage || 'Unable to load message.') + '</div>';
+		if (loadingEl) loadingEl.innerHTML = '<div class="forums-message-list__empty text-secondary text-center py-5">' + (messageDetail.dataset.labelUnableToLoadMessage) + '</div>';
 		console.error('ForumsMessageDetail error:', err);
 	});
 	}
@@ -1269,7 +1269,7 @@ if (messageDetail) {
 			if (opMsg) {
 				var creator = opMsg.creator || {};
 				opCreatorId = creator.id || null;
-				opAuthorName = displayName(creator) || messageDetail.dataset.labelUnknown || 'Unknown';
+				opAuthorName = displayName(creator) || messageDetail.dataset.labelUnknown;
 				if (opBody) {
 					opBody.innerHTML = opMsg.body || '';
 					formatMarkupCodeBlocks(opBody);
@@ -1287,7 +1287,7 @@ if (messageDetail) {
 						opAvatar.innerHTML = '<span class="sticker-overlay">' + Liferay.Util.escapeHTML(avatarInitial(displayName(creator))) + '</span>';
 					}
 				}
-				if (opAuthor) opAuthor.textContent = displayName(creator) || messageDetail.dataset.labelUnknown || 'Unknown';
+				if (opAuthor) opAuthor.textContent = displayName(creator) || messageDetail.dataset.labelUnknown;
 				/* Tag the OP rank placeholder with the author's id so fillAuthorRanks
 				   populates it alongside the reply cards. */
 				var opRankEl = messageDetail.querySelector('#forumsDetailOPRank');
@@ -1334,8 +1334,8 @@ if (messageDetail) {
 					
 					opVoteEl.className = 'align-items-center d-inline-flex justify-content-center text-secondary forums-vote';
 					opVoteEl.setAttribute('data-message-id', opMsg.id);
-					var upvoteTitle = messageDetail.dataset.labelUpvote || 'Upvote';
-					var downvoteTitle = messageDetail.dataset.labelDownvote || 'Downvote';
+					var upvoteTitle = messageDetail.dataset.labelUpvote;
+					var downvoteTitle = messageDetail.dataset.labelDownvote;
 					opVoteEl.innerHTML = `
 						<button class="btn-thumbs-up btn btn-monospaced btn-outline-borderless btn-outline-secondary forums-vote__btn forums-vote__btn--up${opUpActive}" type="button" aria-pressed="${opIsUpPressed}"${canVote ? ` data-vote-dir="up" data-message-id="${opMsg.id}"` : ' disabled'} title="${upvoteTitle}">
 							<svg class="lexicon-icon lexicon-icon-${opUpIcon}" role="presentation"><use href="${clayIconsUrl}#${opUpIcon}"></use></svg>
@@ -1390,8 +1390,8 @@ if (messageDetail) {
 				var toggleQuestionBtn = messageDetail.querySelector('#forumsDetailToggleQuestionBtn');
 				if (toggleQuestionBtn && !isBanned && (canUpdateMessage || (opCreatorId && String(opCreatorId) === String(currentUserId)))) {
 					toggleQuestionBtn.textContent = isMessageQuestion 
-						? (messageDetail.dataset.labelConvertToMessage || 'Convert to Discussion')
-						: (messageDetail.dataset.labelConvertToQuestion || 'Convert to Question');
+						? (messageDetail.dataset.labelConvertToMessage)
+						: (messageDetail.dataset.labelConvertToQuestion);
 					toggleQuestionBtn.style.display = '';
 					
 					var newBtn = toggleQuestionBtn.cloneNode(true);
@@ -1483,8 +1483,8 @@ if (messageDetail) {
 				if (repliesSection) repliesSection.style.display = '';
 				if (replyCountEl) {
 					var tmpl = regularReplyCount === 1
-						? (messageDetail.dataset.labelXReply || '{0} reply')
-						: (messageDetail.dataset.labelXReplies || '{0} replies');
+						? (messageDetail.dataset.labelXReply)
+						: (messageDetail.dataset.labelXReplies);
 					replyCountEl.textContent = tmpl.replace('{0}', regularReplyCount);
 				}
 
@@ -1563,7 +1563,7 @@ if (messageDetail) {
 			}); /* end fetchUserVotes callback */
 		})
 		.catch(function(err) {
-			if (loadingEl) loadingEl.innerHTML = '<div class="forums-message-list__empty text-secondary text-center py-5">' + (messageDetail.dataset.labelUnableToLoadMessages || 'Unable to load messages.') + '</div>';
+			if (loadingEl) loadingEl.innerHTML = '<div class="forums-message-list__empty text-secondary text-center py-5">' + (messageDetail.dataset.labelUnableToLoadMessages) + '</div>';
 			console.error('ForumsMessageDetail messages error:', err);
 		});
 	}
@@ -1585,11 +1585,11 @@ if (messageDetail) {
 			modal.setAttribute('aria-labelledby', 'forumsReportModalHeading');
 
 			var reasonOptions = [
-				{ value: 'spam', label: messageDetail.dataset.labelSpam || 'Spam' },
-				{ value: 'harmful-dangerous-acts', label: messageDetail.dataset.labelHarmfulDangerousActs || 'Harmful Dangerous Acts' },
-				{ value: 'harassment-bullying', label: messageDetail.dataset.labelHarassmentBullying || 'Harassment or Bullying' },
-				{ value: 'nudity-sexual-content', label: messageDetail.dataset.labelNuditySexualContent || 'Nudity or Sexual Content' },
-				{ value: 'other', label: messageDetail.dataset.labelOther || 'Other' }
+				{ value: 'spam', label: messageDetail.dataset.labelSpam },
+				{ value: 'harmful-dangerous-acts', label: messageDetail.dataset.labelHarmfulDangerousActs },
+				{ value: 'harassment-bullying', label: messageDetail.dataset.labelHarassmentBullying },
+				{ value: 'nudity-sexual-content', label: messageDetail.dataset.labelNuditySexualContent },
+				{ value: 'other', label: messageDetail.dataset.labelOther }
 			];
 
 			var optionsHtml = reasonOptions.map(function(opt) {
@@ -1600,7 +1600,7 @@ if (messageDetail) {
 				<div class="modal-dialog modal-dialog-centered">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h1 class="modal-title" id="forumsReportModalHeading" tabindex="-1">${Liferay.Util.escapeHTML(messageDetail.dataset.labelReportInappropriateContent || 'Report Inappropriate Content')}</h1>
+							<h1 class="modal-title" id="forumsReportModalHeading" tabindex="-1">${Liferay.Util.escapeHTML(messageDetail.dataset.labelReportInappropriateContent)}</h1>
 							<button class="close btn btn-unstyled forums-report-modal-close" type="button" aria-label="Close">
 								<svg class="lexicon-icon lexicon-icon-times" role="presentation">
 									<use href="${clayIconsUrl}#times"></use>
@@ -1608,9 +1608,9 @@ if (messageDetail) {
 							</button>
 						</div>
 						<div class="modal-body">
-							<p class="text-secondary">${Liferay.Util.escapeHTML(messageDetail.dataset.labelReportDescription || 'You are about to report a violation of our Terms of Use. All reports are strictly confidential.')}</p>
+							<p class="text-secondary">${Liferay.Util.escapeHTML(messageDetail.dataset.labelReportDescription)}</p>
 							<div class="form-group">
-								<label for="forumsReportReason" class="font-weight-bold">${Liferay.Util.escapeHTML(messageDetail.dataset.labelReasonForReport || 'Reason for the Report')}</label>
+								<label for="forumsReportReason" class="font-weight-bold">${Liferay.Util.escapeHTML(messageDetail.dataset.labelReasonForReport)}</label>
 								<select class="form-control" id="forumsReportReason">
 									${optionsHtml}
 								</select>
@@ -1619,8 +1619,8 @@ if (messageDetail) {
 						<div class="modal-footer">
 							<div class="modal-item-last">
 								<div class="btn-group-spaced" role="group">
-									<button class="btn btn-secondary forums-report-modal-close" type="button">${Liferay.Util.escapeHTML(messageDetail.dataset.labelCancel || 'Cancel')}</button>
-									<button class="btn btn-primary" type="button" id="forumsReportModalSubmitBtn">${Liferay.Util.escapeHTML(messageDetail.dataset.labelReport || 'Report')}</button>
+									<button class="btn btn-secondary forums-report-modal-close" type="button">${Liferay.Util.escapeHTML(messageDetail.dataset.labelCancel)}</button>
+									<button class="btn btn-primary" type="button" id="forumsReportModalSubmitBtn">${Liferay.Util.escapeHTML(messageDetail.dataset.labelReport)}</button>
 								</div>
 							</div>
 						</div>
@@ -1646,10 +1646,10 @@ if (messageDetail) {
 						modal.style.display = 'none';
 						modal.classList.remove('show');
 						submitBtn.disabled = false;
-						submitBtn.textContent = messageDetail.dataset.labelReport || 'Report';
+						submitBtn.textContent = messageDetail.dataset.labelReport;
 					}, function() {
 						submitBtn.disabled = false;
-						submitBtn.textContent = messageDetail.dataset.labelReport || 'Report';
+						submitBtn.textContent = messageDetail.dataset.labelReport;
 					});
 				}
 			});
@@ -1704,13 +1704,13 @@ if (messageDetail) {
 						return r.json().then(function(body) {
 							existingFlagId = body.id;
 							onSuccess();
-							flagBtn.textContent = messageDetail.dataset.labelFlagged || 'Flagged';
+							flagBtn.textContent = messageDetail.dataset.labelFlagged;
 							flagBtn.classList.add('disabled');
 							flagBtn.disabled = true;
 							/* Standard Liferay toast feedback */
 							if (Liferay.Util && Liferay.Util.openToast) {
 								Liferay.Util.openToast({
-									message: messageDetail.dataset.labelReportSubmitted || 'Thank you! Your report has been submitted.',
+									message: messageDetail.dataset.labelReportSubmitted,
 									type: 'success'
 								});
 							}
@@ -1734,7 +1734,7 @@ if (messageDetail) {
 			if (typeof window.forumsOpenComposeModal === 'function') {
 				window.forumsOpenComposeModal({ messageId: messageId });
 			} else {
-				alert(messageDetail.dataset.labelReplyFormNotFound || 'Reply form not found on this page. Please add the forums-message-composer fragment.');
+				alert(messageDetail.dataset.labelReplyFormNotFound);
 			}
 		});
 	}
@@ -1790,7 +1790,7 @@ if (messageDetail) {
 			if (erc === 'Mappable Message ERC') erc = null;
 
 			if (!erc) {
-				if (loadingEl) loadingEl.innerHTML = '<div class="forums-message-list__empty text-secondary text-center py-5">' + (messageDetail.dataset.labelErcNotMapped || 'Message ERC is not mapped.') + '</div>';
+				if (loadingEl) loadingEl.innerHTML = '<div class="forums-message-list__empty text-secondary text-center py-5">' + (messageDetail.dataset.labelErcNotMapped) + '</div>';
 			} else {
 				Liferay.Util.fetch(portalURL + '/o/c/forumthreads/scopes/' + scopeGroupId + '/by-external-reference-code/' + encodeURIComponent(erc), {
 					headers: headers,

@@ -136,7 +136,7 @@ if (messageComposer) {
 		stagedFiles.forEach(function(file, index) {
 			var chip = document.createElement('span');
 			chip.className = 'label label-secondary label-dismissible forums-message-composer__pending-file';
-			var removeLabel = (messageComposer.dataset.labelRemove || 'Remove');
+			var removeLabel = (messageComposer.dataset.labelRemove);
 			chip.innerHTML = '<span class="label-item label-item-expand">' +
 				Liferay.Util.escapeHTML(file.name) + '</span>' +
 				'<span class="label-item label-item-after"><button class="close" type="button" data-file-index="' +
@@ -151,7 +151,7 @@ if (messageComposer) {
 	function renderExistingAttachments() {
 		if (!existingFilesEl) return;
 		existingFilesEl.innerHTML = '';
-		var removeLabelTmpl = messageComposer.dataset.labelRemoveAttachment || 'Remove {0}';
+		var removeLabelTmpl = messageComposer.dataset.labelRemoveAttachment;
 		existingAttachments.forEach(function(att) {
 			if (removedAttachmentIds.indexOf(att.id) !== -1) return;
 			var file = att.file || {};
@@ -223,7 +223,7 @@ if (messageComposer) {
 				if (file.size > MAX_FILE_SIZE) {
 					if (Liferay.Util && Liferay.Util.openToast) {
 						Liferay.Util.openToast({
-							message: (messageComposer.dataset.labelFileTooLarge || 'The file is too large.') + ' (' + file.name + ')',
+							message: (messageComposer.dataset.labelFileTooLarge) + ' (' + file.name + ')',
 							type: 'danger'
 						});
 					}
@@ -327,7 +327,7 @@ if (messageComposer) {
 				isBanned = true;
 				if (submitBtn) submitBtn.disabled = true;
 				if (errorAlert) {
-					errorAlert.textContent = messageComposer.dataset.labelBannedWarning || 'Your account has been banned from participating in the forums.';
+					errorAlert.textContent = messageComposer.dataset.labelBannedWarning;
 					errorAlert.style.display = '';
 				}
 			}
@@ -469,7 +469,7 @@ if (messageComposer) {
 		if (bodyError) bodyError.style.display = 'none';
 		if (submitBtn) {
 			submitBtn.disabled = isBanned;
-			submitBtn.textContent = messageComposer.dataset.labelPost || 'Post';
+			submitBtn.textContent = messageComposer.dataset.labelPost;
 		}
 		if (bodyEditorInstance) {
 			bodyEditorInstance.setData('');
@@ -523,18 +523,18 @@ if (messageComposer) {
 		priorityApplicable = (isEditMode && editIsOp) || (!isEditMode && !replyMode);
 		syncPriorityGroup();
 		if (isEditMode && editIsOp) {
-			if (titleEl) titleEl.textContent = messageComposer.dataset.labelEditTopic || 'Edit Topic';
+			if (titleEl) titleEl.textContent = messageComposer.dataset.labelEditTopic;
 			if (leftCol) leftCol.style.display = '';
 			if (categoryGroup) categoryGroup.style.display = '';
 			if (subjectGroup) subjectGroup.style.display = '';
 			if (questionGroup) questionGroup.style.display = '';
 			if (subscribeGroup) subscribeGroup.style.display = 'none';
 			if (tagsGroup) tagsGroup.style.display = '';
-			if (bodyLabel) bodyLabel.textContent = messageComposer.dataset.labelDetails || 'Details';
-			if (submitBtn) submitBtn.textContent = messageComposer.dataset.labelSaveChanges || 'Save';
+			if (bodyLabel) bodyLabel.textContent = messageComposer.dataset.labelDetails;
+			if (submitBtn) submitBtn.textContent = messageComposer.dataset.labelSaveChanges;
 			loadCategories();
 		} else if (isEditMode && !editIsOp) {
-			if (titleEl) titleEl.textContent = messageComposer.dataset.labelEditReply || 'Edit Reply';
+			if (titleEl) titleEl.textContent = messageComposer.dataset.labelEditReply;
 			/* Keep the left column visible so the Attachments section shows; the
 			   topic-only field groups below are hidden individually. */
 			if (leftCol) leftCol.style.display = '';
@@ -543,10 +543,10 @@ if (messageComposer) {
 			if (questionGroup) questionGroup.style.display = 'none';
 			if (subscribeGroup) subscribeGroup.style.display = 'none';
 			if (tagsGroup) tagsGroup.style.display = 'none';
-			if (bodyLabel) bodyLabel.textContent = messageComposer.dataset.labelYourReply || 'Your Reply';
-			if (submitBtn) submitBtn.textContent = messageComposer.dataset.labelSaveChanges || 'Save';
+			if (bodyLabel) bodyLabel.textContent = messageComposer.dataset.labelYourReply;
+			if (submitBtn) submitBtn.textContent = messageComposer.dataset.labelSaveChanges;
 		} else if (replyMode) {
-			if (titleEl) titleEl.textContent = messageComposer.dataset.labelPostAReply || 'Post a Reply';
+			if (titleEl) titleEl.textContent = messageComposer.dataset.labelPostAReply;
 			/* Keep the left column visible so the Attachments section shows; the
 			   topic-only field groups below are hidden individually. */
 			if (leftCol) leftCol.style.display = '';
@@ -555,18 +555,18 @@ if (messageComposer) {
 			if (questionGroup) questionGroup.style.display = 'none';
 			if (subscribeGroup) subscribeGroup.style.display = 'none';
 			if (tagsGroup) tagsGroup.style.display = 'none';
-			if (bodyLabel) bodyLabel.textContent = messageComposer.dataset.labelYourReply || 'Your Reply';
-			if (submitBtn) submitBtn.textContent = messageComposer.dataset.labelPost || 'Post';
+			if (bodyLabel) bodyLabel.textContent = messageComposer.dataset.labelYourReply;
+			if (submitBtn) submitBtn.textContent = messageComposer.dataset.labelPost;
 		} else {
-			if (titleEl) titleEl.textContent = messageComposer.dataset.labelNewForumThread || 'New Forum Thread';
+			if (titleEl) titleEl.textContent = messageComposer.dataset.labelNewForumThread;
 			if (leftCol) leftCol.style.display = '';
 			if (categoryGroup) categoryGroup.style.display = '';
 			if (subjectGroup) subjectGroup.style.display = '';
 			if (questionGroup) questionGroup.style.display = '';
 			if (subscribeGroup) subscribeGroup.style.display = '';
 			if (tagsGroup) tagsGroup.style.display = '';
-			if (bodyLabel) bodyLabel.textContent = messageComposer.dataset.labelDetails || 'Details';
-			if (submitBtn) submitBtn.textContent = messageComposer.dataset.labelPost || 'Post';
+			if (bodyLabel) bodyLabel.textContent = messageComposer.dataset.labelDetails;
+			if (submitBtn) submitBtn.textContent = messageComposer.dataset.labelPost;
 			loadCategories();
 		}
 	}
@@ -586,7 +586,7 @@ if (messageComposer) {
 			items.forEach(function(cat) {
 				var opt = document.createElement('option');
 				opt.value = cat.id;
-				opt.textContent = cat.categoryName || messageComposer.dataset.labelUnnamed || 'Unnamed';
+				opt.textContent = cat.categoryName || messageComposer.dataset.labelUnnamed;
 				if (categoryIdParam && String(cat.id) === categoryIdParam) {
 					opt.selected = true;
 				}
@@ -699,7 +699,7 @@ if (messageComposer) {
 				if (Liferay.Util && Liferay.Util.openToast) {
 					Liferay.Util.openToast({
 						message: pendingToast,
-						title: messageComposer.dataset.labelSuccess || 'Success',
+						title: messageComposer.dataset.labelSuccess,
 						type: 'success'
 					});
 				}
@@ -749,7 +749,7 @@ if (messageComposer) {
 				if (!valid) return;
 
 				submitBtn.disabled = true;
-				submitBtn.textContent = messageComposer.dataset.labelPosting || 'Posting...';
+				submitBtn.textContent = messageComposer.dataset.labelPosting;
 
 				var promises = [];
 				if (editIsOp) {
@@ -802,19 +802,19 @@ if (messageComposer) {
 				.then(function() { return uploadAttachments(editMessageId); })
 				.then(function() {
 					hideModal();
-					sessionStorage.setItem('forumsSuccessToast', messageComposer.dataset.labelSuccess || 'Success!');
+					sessionStorage.setItem('forumsSuccessToast', messageComposer.dataset.labelSuccess);
 					spaNavigate(window.location.pathname + window.location.search);
 				})
 				.catch(function(err) {
 					console.error('Edit error:', err);
 					if (errorAlert) errorAlert.style.display = '';
 					submitBtn.disabled = false;
-					submitBtn.textContent = messageComposer.dataset.labelSaveChanges || 'Save';
+					submitBtn.textContent = messageComposer.dataset.labelSaveChanges;
 				});
 
 			} else if (isReplyMode) {
 				submitBtn.disabled = true;
-				submitBtn.textContent = messageComposer.dataset.labelPosting || 'Posting...';
+				submitBtn.textContent = messageComposer.dataset.labelPosting;
 
 				var replyPayload = {
 					r_threadMessages_c_forumThreadId: parseInt(messageId),
@@ -838,14 +838,14 @@ if (messageComposer) {
 				.then(function(reply) { return uploadAttachments(reply && reply.id); })
 				.then(function() {
 					hideModal();
-					sessionStorage.setItem('forumsSuccessToast', messageComposer.dataset.labelReplyPosted || 'Reply posted successfully!');
+					sessionStorage.setItem('forumsSuccessToast', messageComposer.dataset.labelReplyPosted);
 					spaNavigate(window.location.pathname + window.location.search);
 				})
 				.catch(function(err) {
 					console.error('Reply error:', err);
 					if (errorAlert) errorAlert.style.display = '';
 					submitBtn.disabled = false;
-					submitBtn.textContent = messageComposer.dataset.labelPost || 'Post';
+					submitBtn.textContent = messageComposer.dataset.labelPost;
 				});
 
 			} else {
@@ -871,7 +871,7 @@ if (messageComposer) {
 				if (!valid) return;
 
 				submitBtn.disabled = true;
-				submitBtn.textContent = messageComposer.dataset.labelPosting || 'Posting...';
+				submitBtn.textContent = messageComposer.dataset.labelPosting;
 
 				var messagePayload = {
 					messageTitle: subject,
@@ -928,7 +928,7 @@ if (messageComposer) {
 						if (!msg.friendlyUrlPath) {
 							if (Liferay.Util && Liferay.Util.openToast) {
 								Liferay.Util.openToast({
-									message: messageComposer.dataset.labelDisplayPageNotConfigured || 'Message created, but the display page is not configured.',
+									message: messageComposer.dataset.labelDisplayPageNotConfigured,
 									type: 'danger'
 								});
 							}
@@ -936,7 +936,7 @@ if (messageComposer) {
 							return;
 						}
 						hideModal();
-						sessionStorage.setItem('forumsSuccessToast', messageComposer.dataset.labelQuestionPosted || 'Your question has been posted!');
+						sessionStorage.setItem('forumsSuccessToast', messageComposer.dataset.labelQuestionPosted);
 						var siteSlug = (msg.scopeKey || '').toLowerCase().replace(/ /g, '-');
 						spaNavigate(Liferay.ThemeDisplay.getPathFriendlyURLPublic() + '/' + siteSlug + '/c_forumthread/' + msg.friendlyUrlPath);
 					});
@@ -945,7 +945,7 @@ if (messageComposer) {
 					console.error('New message error:', err);
 					if (errorAlert) errorAlert.style.display = '';
 					submitBtn.disabled = false;
-					submitBtn.textContent = messageComposer.dataset.labelPost || 'Post';
+					submitBtn.textContent = messageComposer.dataset.labelPost;
 				});
 			}
 		});
@@ -1099,7 +1099,7 @@ if (messageComposer) {
 
 			if (!currentItems.length) {
 				dropdown.innerHTML = '<div class="forums-mention-dropdown__empty">' +
-					Liferay.Util.escapeHTML(messageComposer.dataset.labelMentionNoUsers || 'No users found') + '</div>';
+					Liferay.Util.escapeHTML(messageComposer.dataset.labelMentionNoUsers) + '</div>';
 				dropdown.style.display = 'block';
 				positionDropdown(editableEl);
 				return;

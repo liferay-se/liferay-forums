@@ -101,8 +101,8 @@ if (topPosters) {
 
 	function postsText(count) {
 		var tmpl = count === 1
-			? (topPosters.dataset.labelXPost || '{0} post')
-			: (topPosters.dataset.labelXPosts || '{0} posts');
+			? (topPosters.dataset.labelXPost)
+			: (topPosters.dataset.labelXPosts);
 		return tmpl.replace('{0}', count);
 	}
 
@@ -119,14 +119,14 @@ if (topPosters) {
 
 				if (items.length === 0) {
 					leaderboard.innerHTML = '<li class="forums-hero__empty ' + mutedClass + ' text-center py-3">'
-						+ (topPosters.dataset.labelNoPosters || 'No top posters yet.') + '</li>';
+						+ (topPosters.dataset.labelNoPosters) + '</li>';
 					return;
 				}
 
 				var html = '';
 				items.forEach(function(stats, idx) {
 					var creator = stats.creator || {};
-					var name = displayName(creator) || (topPosters.dataset.labelUnknown || 'Unknown');
+					var name = displayName(creator) || (topPosters.dataset.labelUnknown);
 					var count = stats.messageCount || 0;
 					var rank = showRank ? rankLabel(count) : '';
 					html += '<li class="forums-hero__card card card-interactive card-interactive-secondary">'
@@ -141,7 +141,7 @@ if (topPosters) {
 			})
 			.catch(function(err) {
 				leaderboard.innerHTML = '<li class="forums-hero__empty text-white-50 text-center py-3">'
-					+ (topPosters.dataset.labelUnableToLoad || 'Unable to load statistics.') + '</li>';
+					+ (topPosters.dataset.labelUnableToLoad) + '</li>';
 				console.error('ForumsHero top posters error:', err);
 			});
 		});

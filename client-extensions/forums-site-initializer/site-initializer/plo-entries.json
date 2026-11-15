@@ -406,5 +406,53 @@
 	{
 		"key": "no-users-found",
 		"value": "{\"en_US\": \"No users found\"}"
+	},
+	{
+		"key": "forums-answer-selected-by-x",
+		"value": "{\"en_US\": \"Answer selected by {0}\"}"
+	},
+	{
+		"key": "forums-no-top-posters-yet",
+		"value": "{\"en_US\": \"No top posters yet.\"}"
+	},
+	{
+		"key": "forums-unable-to-load-statistics",
+		"value": "{\"en_US\": \"Unable to load statistics.\"}"
+	},
+	{
+		"key": "forums-x-post",
+		"value": "{\"en_US\": \"{0} post\"}"
+	},
+	{
+		"key": "forums-x-posts",
+		"value": "{\"en_US\": \"{0} posts\"}"
+	},
+	{
+		"key": "forums-error-updating-category",
+		"value": "{\"en_US\": \"Error updating category.\"}"
+	},
+	{
+		"key": "forums-new-forum-thread",
+		"value": "{\"en_US\": \"New Forum Thread\"}"
+	},
+	{
+		"key": "forums-message-created-display-page-not-configured",
+		"value": "{\"en_US\": \"Message created, but the display page is not configured.\"}"
+	},
+	{
+		"key": "forums-display-page-not-configured-for-some-messages",
+		"value": "{\"en_US\": \"Display page is not configured for one or more messages.\"}"
+	},
+	{
+		"key": "forums-subscribed-to-message",
+		"value": "{\"en_US\": \"You have been subscribed to this message.\"}"
+	},
+	{
+		"key": "forums-unsubscribed-from-message",
+		"value": "{\"en_US\": \"You have been unsubscribed from this message.\"}"
+	},
+	{
+		"key": "forums-message-erc-not-mapped",
+		"value": "{\"en_US\": \"Message ERC is not mapped.\"}"
 	}
 ]

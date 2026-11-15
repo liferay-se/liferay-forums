@@ -30,18 +30,18 @@
 		data-on-dark="${onDark?string("true", "false")}"
 		data-posters-count="${(configuration.topPostersCount!"3")}"
 		data-show-rank="${showPosterRank?string("true", "false")}"
-		data-label-unable-to-load="${languageUtil.get(locale, "unable-to-load-statistics", "Unable to load statistics.")}"
-		data-label-unknown="${languageUtil.get(locale, "unknown", "Unknown")}"
-		data-label-no-posters="${languageUtil.get(locale, "no-top-posters-yet", "No top posters yet.")}"
-		data-label-x-post="${languageUtil.get(locale, "x-post", "{0} post")}"
-		data-label-x-posts="${languageUtil.get(locale, "x-posts", "{0} posts")}">
+		data-label-unable-to-load="${languageUtil.get(locale, "forums-unable-to-load-statistics")}"
+		data-label-unknown="${languageUtil.get(locale, "unknown")}"
+		data-label-no-posters="${languageUtil.get(locale, "forums-no-top-posters-yet")}"
+		data-label-x-post="${languageUtil.get(locale, "forums-x-post")}"
+		data-label-x-posts="${languageUtil.get(locale, "forums-x-posts")}">
 		<div class="container">
 			<div class="row justify-content-center">
 				<div class="col-lg-8">
-					<h2 class="forums-hero__top-posters-heading[#if onDark] text-white[/#if]">[#if topPostersHeadingText?has_content]${topPostersHeadingText}[#else]${languageUtil.get(locale, "top-posters", "Top Posters")}[/#if]</h2>
+					<h2 class="forums-hero__top-posters-heading[#if onDark] text-white[/#if]">[#if topPostersHeadingText?has_content]${topPostersHeadingText}[#else]${languageUtil.get(locale, "top-posters")}[/#if]</h2>
 
 					<ol class="forums-hero__leaderboard list-unstyled" id="forumsHeroLeaderboard" style="--posters-per-row: ${postersPerRow};">
-						<li class="forums-hero__loading [#if onDark]text-white-50[#else]text-secondary[/#if] text-center py-3">${languageUtil.get(locale, "loading", "Loading...")}</li>
+						<li class="forums-hero__loading [#if onDark]text-white-50[#else]text-secondary[/#if] text-center py-3">${languageUtil.get(locale, "loading")}</li>
 					</ol>
 				</div>
 			</div>
@@ -108,7 +108,7 @@
 						<div class="forums-hero__stats mb-4">
 							<div class="row justify-content-center">
 								[#if showSolutions][@stat solutionsData languageUtil.get(locale, "solutions") /][/#if]
-								[#if showDiscussions][@stat threadsData languageUtil.get(locale, "discussions", "Discussions") /][/#if]
+								[#if showDiscussions][@stat threadsData languageUtil.get(locale, "discussions") /][/#if]
 								[#if showMessages][@stat messagesData languageUtil.get(locale, "messages") /][/#if]
 								[#if showParticipants][@stat participantsData languageUtil.get(locale, "participants") /][/#if]
 							</div>

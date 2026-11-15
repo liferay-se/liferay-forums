@@ -29,11 +29,11 @@ if (forumsMod) {
 
 	/* Reason labels map */
 	var reasonLabels = {
-		'spam': forumsMod.dataset.labelSpam || 'Spam',
-		'harmful-dangerous-acts': forumsMod.dataset.labelHarmfulDangerousActs || 'Harmful Dangerous Acts',
-		'harassment-bullying': forumsMod.dataset.labelHarassmentBullying || 'Harassment or Bullying',
-		'nudity-sexual-content': forumsMod.dataset.labelNuditySexualContent || 'Nudity or Sexual Content',
-		'other': forumsMod.dataset.labelOther || 'Other'
+		'spam': forumsMod.dataset.labelSpam,
+		'harmful-dangerous-acts': forumsMod.dataset.labelHarmfulDangerousActs,
+		'harassment-bullying': forumsMod.dataset.labelHarassmentBullying,
+		'nudity-sexual-content': forumsMod.dataset.labelNuditySexualContent,
+		'other': forumsMod.dataset.labelOther
 	};
 
 	function displayName(creator) {
@@ -50,7 +50,7 @@ if (forumsMod) {
 	}
 
 	function getReasonLabel(reason) {
-		return reasonLabels[reason] || reason || forumsMod.dataset.labelOther || 'Other';
+		return reasonLabels[reason] || reason || forumsMod.dataset.labelOther;
 	}
 
 	function getReasonBadgeClass(reason) {
@@ -86,7 +86,7 @@ if (forumsMod) {
 							</div>
 							<span id="forumsModConfirmHeading">${Liferay.Util.escapeHTML(confirmLabel)}</span>
 						</h1>
-						<button class="close btn btn-unstyled" type="button" id="forumsModConfirmClose" aria-label="${Liferay.Util.escapeHTML(forumsMod.dataset.labelCancel || 'Cancel')}">
+						<button class="close btn btn-unstyled" type="button" id="forumsModConfirmClose" aria-label="${Liferay.Util.escapeHTML(forumsMod.dataset.labelCancel)}">
 							<svg class="lexicon-icon lexicon-icon-times" focusable="false" role="presentation"><use href="${Liferay.ThemeDisplay.getPathThemeImages()}/clay/icons.svg#times"></use></svg>
 						</button>
 					</div>
@@ -96,7 +96,7 @@ if (forumsMod) {
 					<div class="modal-footer">
 						<div class="modal-item-last">
 							<div class="btn-group-spaced" role="group">
-								<button class="btn btn-secondary" type="button" id="forumsModConfirmCancel">${Liferay.Util.escapeHTML(forumsMod.dataset.labelCancel || 'Cancel')}</button>
+								<button class="btn btn-secondary" type="button" id="forumsModConfirmCancel">${Liferay.Util.escapeHTML(forumsMod.dataset.labelCancel)}</button>
 								<button class="btn btn-danger" type="button" id="forumsModConfirmOk">${Liferay.Util.escapeHTML(confirmLabel)}</button>
 							</div>
 						</div>
@@ -209,7 +209,7 @@ if (forumsMod) {
 			var lastPage = data.lastPage || 1;
 
 			if (items.length === 0) {
-				flagList.innerHTML = '<div class="list-group-item text-secondary">' + (forumsMod.dataset.labelNoBans || 'No bans found.') + '</div>';
+				flagList.innerHTML = '<div class="list-group-item text-secondary">' + (forumsMod.dataset.labelNoBans) + '</div>';
 				return;
 			}
 
@@ -220,11 +220,11 @@ if (forumsMod) {
 				infoDiv.className = 'forums-moderation__flag-info';
 				var titleLink = document.createElement('span');
 				titleLink.className = 'forums-moderation__message-title font-weight-bold';
-				titleLink.textContent = (forumsMod.dataset.labelUserId || 'User ID: {0}').replace('{0}', ban.banUserId);
+				titleLink.textContent = (forumsMod.dataset.labelUserId).replace('{0}', ban.banUserId);
 				var metaDiv = document.createElement('div');
 				metaDiv.className = 'forums-moderation__flag-meta text-secondary small mt-1';
 				var dateSpan = document.createElement('span');
-				dateSpan.textContent = (forumsMod.dataset.labelBannedOn || 'Banned on: {0}').replace('{0}', formatDate(ban.dateCreated));
+				dateSpan.textContent = (forumsMod.dataset.labelBannedOn).replace('{0}', formatDate(ban.dateCreated));
 				metaDiv.appendChild(dateSpan);
 				infoDiv.appendChild(titleLink);
 				infoDiv.appendChild(metaDiv);
@@ -233,13 +233,13 @@ if (forumsMod) {
 				if (ban.actions && ban.actions['delete']) {
 					var revokeBtn = document.createElement('button');
 					revokeBtn.className = 'btn btn-sm btn-outline-success';
-					revokeBtn.textContent = forumsMod.dataset.labelRevokeBan || 'Revoke Ban';
+					revokeBtn.textContent = forumsMod.dataset.labelRevokeBan;
 					revokeBtn.addEventListener('click', function() {
-						var message = forumsMod.dataset.labelConfirmRevokeBan || 'Are you sure you want to revoke this ban?';
-						showConfirmModal(message, forumsMod.dataset.labelRevokeBan || 'Revoke Ban', function() {
+						var message = forumsMod.dataset.labelConfirmRevokeBan;
+						showConfirmModal(message, forumsMod.dataset.labelRevokeBan, function() {
 							revokeBtn.disabled = true;
 							Liferay.Util.fetch(ban.actions['delete'].href, { headers: headers, method: 'DELETE' }).then(function(r) {
-								if (r.ok) { item.style.opacity = '0.5'; setTimeout(function() { item.remove(); showToast(forumsMod.dataset.labelBanRevokedSuccessfully || 'Ban revoked successfully.'); if (flagList.children.length === 0) loadBans(); }, 300); }
+								if (r.ok) { item.style.opacity = '0.5'; setTimeout(function() { item.remove(); showToast(forumsMod.dataset.labelBanRevokedSuccessfully); if (flagList.children.length === 0) loadBans(); }, 300); }
 							}).catch(function(e) { revokeBtn.disabled = false; console.error(e); });
 						});
 					});
@@ -304,7 +304,7 @@ if (forumsMod) {
 			var lastPage = data.lastPage || 1;
 
 			if (items.length === 0) {
-				flagList.innerHTML = '<div class="list-group-item text-secondary">' + (forumsMod.dataset.labelNoFlags || 'No flagged messages found.') + '</div>';
+				flagList.innerHTML = '<div class="list-group-item text-secondary">' + (forumsMod.dataset.labelNoFlags) + '</div>';
 				return;
 			}
 
@@ -335,13 +335,13 @@ if (forumsMod) {
 				titleLink.textContent = messageTitle;
 				if (titleHref) titleLink.href = titleHref;
 				titleLink.target = '_blank';
-				titleLink.title = forumsMod.dataset.labelViewMessage || 'View Message';
+				titleLink.title = forumsMod.dataset.labelViewMessage;
 
 				var metaDiv = document.createElement('div');
 				metaDiv.className = 'forums-moderation__flag-meta text-secondary small';
 
 				/* Reporter */
-				var reportedByTmpl = forumsMod.dataset.labelReportedBy || 'Reported by {0}';
+				var reportedByTmpl = forumsMod.dataset.labelReportedBy;
 				var reporterSpan = document.createElement('span');
 				reporterSpan.textContent = reportedByTmpl.replace('{0}', creatorName);
 
@@ -358,8 +358,8 @@ if (forumsMod) {
 				var statusBadge = document.createElement('span');
 				statusBadge.className = 'label ' + (isValidated ? 'label-success' : 'label-warning');
 				statusBadge.textContent = isValidated
-					? (forumsMod.dataset.labelValidated || 'Validated')
-					: (forumsMod.dataset.labelPending || 'Pending');
+					? (forumsMod.dataset.labelValidated)
+					: (forumsMod.dataset.labelPending);
 
 				metaDiv.appendChild(reporterSpan);
 				metaDiv.appendChild(dateSpan);
@@ -376,7 +376,7 @@ if (forumsMod) {
 				/* View link — always shown (read-only) */
 				var viewLink = document.createElement('a');
 				viewLink.className = 'btn btn-sm btn-outline-primary' + (titleHref ? '' : ' disabled');
-				viewLink.textContent = forumsMod.dataset.labelViewMessage || 'View Message';
+				viewLink.textContent = forumsMod.dataset.labelViewMessage;
 				if (titleHref) viewLink.href = titleHref;
 				viewLink.target = '_blank';
 				actionsDiv.appendChild(viewLink);
@@ -391,8 +391,8 @@ if (forumsMod) {
 					var validateBtn = document.createElement('button');
 					validateBtn.className = isValidated ? 'btn btn-sm btn-outline-secondary' : 'btn btn-sm btn-outline-success';
 					validateBtn.textContent = isValidated
-						? (forumsMod.dataset.labelPending || 'Pending')
-						: (forumsMod.dataset.labelValidate || 'Validate');
+						? (forumsMod.dataset.labelPending)
+						: (forumsMod.dataset.labelValidate);
 					validateBtn.addEventListener('click', (function(flagId, flagHref, validated) {
 						return function() {
 							var btn = this;
@@ -404,7 +404,7 @@ if (forumsMod) {
 							})
 							.then(function(r) {
 								if (r.ok) {
-									showToast(forumsMod.dataset.labelFlagValidated || 'Flag has been validated.');
+									showToast(forumsMod.dataset.labelFlagValidated);
 									loadFlags();
 								} else {
 									btn.disabled = false;
@@ -424,10 +424,10 @@ if (forumsMod) {
 				if (isValidated && authorId) {
 					var banBtn = document.createElement('button');
 					banBtn.className = 'btn btn-sm btn-outline-danger';
-					banBtn.textContent = forumsMod.dataset.labelBanAuthor || 'Ban Author';
+					banBtn.textContent = forumsMod.dataset.labelBanAuthor;
 					banBtn.addEventListener('click', function() {
-						var message = forumsMod.dataset.labelConfirmBanUser || 'Are you sure you want to ban this user?';
-						showConfirmModal(message, forumsMod.dataset.labelBanAuthor || 'Ban Author', function() {
+						var message = forumsMod.dataset.labelConfirmBanUser;
+						showConfirmModal(message, forumsMod.dataset.labelBanAuthor, function() {
 							banBtn.disabled = true;
 							Liferay.Util.fetch(portalURL + '/o/c/forumbans/scopes/' + scopeGroupId, {
 								headers: headers,
@@ -436,7 +436,7 @@ if (forumsMod) {
 							}).then(function(r) {
 								if (r.ok) {
 									banBtn.style.display = 'none';
-									showToast(forumsMod.dataset.labelUserBanned || 'User has been banned.');
+									showToast(forumsMod.dataset.labelUserBanned);
 								} else {
 									banBtn.disabled = false;
 									console.error('Ban failed');
@@ -453,11 +453,11 @@ if (forumsMod) {
 
 					var dismissBtn = document.createElement('button');
 					dismissBtn.className = 'btn btn-sm btn-outline-danger';
-					dismissBtn.textContent = forumsMod.dataset.labelDismiss || 'Dismiss';
+					dismissBtn.textContent = forumsMod.dataset.labelDismiss;
 					dismissBtn.addEventListener('click', (function(flagItem, flagDeleteHref) {
 						return function() {
-							var message = forumsMod.dataset.labelConfirmDismiss || 'Are you sure you want to dismiss this flag?';
-							showConfirmModal(message, forumsMod.dataset.labelDismiss || 'Dismiss', function() {
+							var message = forumsMod.dataset.labelConfirmDismiss;
+							showConfirmModal(message, forumsMod.dataset.labelDismiss, function() {
 								var btn = dismissBtn;
 								btn.disabled = true;
 								Liferay.Util.fetch(flagDeleteHref, {
@@ -469,7 +469,7 @@ if (forumsMod) {
 										flagItem.style.opacity = '0.5';
 										setTimeout(function() {
 											flagItem.remove();
-											showToast(forumsMod.dataset.labelFlagDismissed || 'Flag has been dismissed.');
+											showToast(forumsMod.dataset.labelFlagDismissed);
 											/* Reload if list is now empty */
 											if (flagList.querySelectorAll('.forums-moderation__flag-item').length === 0) {
 												loadFlags();
@@ -497,7 +497,7 @@ if (forumsMod) {
 
 			if (missingDisplayPage && Liferay.Util && Liferay.Util.openToast) {
 				Liferay.Util.openToast({
-					message: forumsMod.dataset.labelDisplayPageNotConfigured || 'Display page is not configured for one or more messages.',
+					message: forumsMod.dataset.labelDisplayPageNotConfigured,
 					type: 'danger'
 				});
 			}

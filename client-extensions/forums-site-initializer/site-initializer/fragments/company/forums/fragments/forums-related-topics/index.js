@@ -56,14 +56,14 @@ if (relatedTopics && !document.body.classList.contains('has-edit-mode-menu')) {
 		}).slice(0, 5);
 
 		if (items.length === 0) {
-			listEl.innerHTML = '<div class="text-secondary text-center py-2">' + (relatedTopics.dataset.labelNoRelated || 'No related topics found.') + '</div>';
+			listEl.innerHTML = '<div class="text-secondary text-center py-2">' + (relatedTopics.dataset.labelNoRelated) + '</div>';
 			return;
 		}
 
 		var html = '';
 		var missingDisplayPage = false;
 		items.forEach(function(msg) {
-			var title = msg.messageTitle || relatedTopics.dataset.labelUntitled || 'Untitled';
+			var title = msg.messageTitle || relatedTopics.dataset.labelUntitled;
 			var isFlagged = false;
 			var suspiciousActivities = msg.threadSuspiciousActivities || [];
 			for (var s = 0; s < suspiciousActivities.length; s++) {
@@ -75,7 +75,7 @@ if (relatedTopics && !document.body.classList.contains('has-edit-mode-menu')) {
 
 			var flaggedBadge = '';
 			if (isFlagged) {
-				var flaggedText = relatedTopics.dataset.labelFlagged || 'Flagged';
+				var flaggedText = relatedTopics.dataset.labelFlagged;
 				flaggedBadge = '<span class="text-danger ml-2" style="font-size:0.85em"><svg class="lexicon-icon lexicon-icon-warning-full" role="presentation" viewBox="0 0 16 16" fill="currentColor" width="12" height="12"><path d="M16 14.5L8 1 0 14.5h16zM8 13c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm1-3H7V6h2v4z"/></svg> ' + flaggedText + '</span>';
 			}
 
@@ -95,14 +95,14 @@ if (relatedTopics && !document.body.classList.contains('has-edit-mode-menu')) {
 
 		if (missingDisplayPage && Liferay.Util && Liferay.Util.openToast) {
 			Liferay.Util.openToast({
-				message: relatedTopics.dataset.labelDisplayPageNotConfigured || 'Display page is not configured for one or more messages.',
+				message: relatedTopics.dataset.labelDisplayPageNotConfigured,
 				type: 'danger'
 			});
 		}
 	})
 	.catch(function(err) {
 		if (loadingEl) loadingEl.remove();
-		listEl.innerHTML = '<div class="text-secondary text-center py-2">' + (relatedTopics.dataset.labelUnableToLoad || 'Unable to load related topics.') + '</div>';
+		listEl.innerHTML = '<div class="text-secondary text-center py-2">' + (relatedTopics.dataset.labelUnableToLoad) + '</div>';
 		console.error('ForumsRelatedTopics error:', err);
 	});
 	} // end runRelatedTopics
@@ -137,7 +137,7 @@ if (relatedTopics && !document.body.classList.contains('has-edit-mode-menu')) {
 
 			if (!erc) {
 				if (loadingEl) loadingEl.remove();
-				listEl.innerHTML = '<div class="text-secondary text-center py-2">' + (relatedTopics.dataset.labelErcNotMapped || 'Message ERC is not mapped.') + '</div>';
+				listEl.innerHTML = '<div class="text-secondary text-center py-2">' + (relatedTopics.dataset.labelErcNotMapped) + '</div>';
 			} else {
 				Liferay.Util.fetch(portalURL + '/o/c/forumthreads/scopes/' + scopeGroupId + '/by-external-reference-code/' + encodeURIComponent(erc), {
 					headers: headers,

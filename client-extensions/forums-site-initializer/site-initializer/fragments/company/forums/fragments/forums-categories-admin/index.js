@@ -66,7 +66,7 @@ if (forumsCategoriesAdmin) {
 			var items = data.items || [];
 
 			if (items.length === 0) {
-				listEl.innerHTML = '<li class="list-group-item text-secondary">' + (forumsCategoriesAdmin.dataset.labelNoCategories || 'No categories found.') + '</li>';
+				listEl.innerHTML = '<li class="list-group-item text-secondary">' + (forumsCategoriesAdmin.dataset.labelNoCategories) + '</li>';
 				return;
 			}
 
@@ -82,7 +82,7 @@ if (forumsCategoriesAdmin) {
 
 				var nameSpan = document.createElement('span');
 				nameSpan.className = 'font-weight-bold';
-				nameSpan.textContent = cat.categoryName || forumsCategoriesAdmin.dataset.labelUnnamed || 'Unnamed';
+				nameSpan.textContent = cat.categoryName || forumsCategoriesAdmin.dataset.labelUnnamed;
 
 				var descSpan = document.createElement('span');
 				descSpan.className = 'text-secondary small';
@@ -102,8 +102,8 @@ if (forumsCategoriesAdmin) {
 				if (updateAction) {
 					editBtn = document.createElement('button');
 					editBtn.className = 'btn btn-sm btn-outline-secondary mr-2';
-					editBtn.title = forumsCategoriesAdmin.dataset.labelEdit || 'Edit';
-					editBtn.ariaLabel = forumsCategoriesAdmin.dataset.labelEdit || 'Edit';
+					editBtn.title = forumsCategoriesAdmin.dataset.labelEdit;
+					editBtn.ariaLabel = forumsCategoriesAdmin.dataset.labelEdit;
 					editBtn.setAttribute('data-tooltip-align', 'top');
 					editBtn.innerHTML = '<svg class="lexicon-icon lexicon-icon-pencil" role="presentation"><use href="' + clayIconsUrl + '#pencil"></use></svg>';
 					actionsDiv.appendChild(editBtn);
@@ -113,8 +113,8 @@ if (forumsCategoriesAdmin) {
 				if (cat.actions && cat.actions['delete']) {
 					var delBtn = document.createElement('button');
 					delBtn.className = 'btn btn-sm btn-outline-danger';
-					delBtn.title = forumsCategoriesAdmin.dataset.labelDelete || 'Delete';
-					delBtn.ariaLabel = forumsCategoriesAdmin.dataset.labelDelete || 'Delete';
+					delBtn.title = forumsCategoriesAdmin.dataset.labelDelete;
+					delBtn.ariaLabel = forumsCategoriesAdmin.dataset.labelDelete;
 					delBtn.setAttribute('data-tooltip-align', 'top');
 					delBtn.innerHTML = '<svg class="lexicon-icon lexicon-icon-trash" role="presentation"><use href="' + clayIconsUrl + '#trash"></use></svg>';
 					delBtn.addEventListener('click', function() {
@@ -135,8 +135,8 @@ if (forumsCategoriesAdmin) {
 					editForm.className = 'mb-0';
 					var nameFieldId = 'forumsCatEditName-' + cat.id;
 					var descFieldId = 'forumsCatEditDesc-' + cat.id;
-					var labelName = forumsCategoriesAdmin.dataset.labelCategoryName || 'Category Name';
-					var labelDesc = forumsCategoriesAdmin.dataset.labelDescription || 'Description';
+					var labelName = forumsCategoriesAdmin.dataset.labelCategoryName;
+					var labelDesc = forumsCategoriesAdmin.dataset.labelDescription;
 					editForm.innerHTML = '<div class="row align-items-end">' +
 						'<div class="col-12 col-md">' +
 							'<div class="form-group mb-3 mb-md-0">' +
@@ -151,8 +151,8 @@ if (forumsCategoriesAdmin) {
 							'</div>' +
 						'</div>' +
 						'<div class="col-12 col-md-auto mt-3 mt-md-0">' +
-							'<button type="submit" class="btn btn-primary mr-2">' + (forumsCategoriesAdmin.dataset.labelSave || 'Save') + '</button>' +
-							'<button type="button" class="btn btn-outline-secondary cancel-edit-btn">' + (forumsCategoriesAdmin.dataset.labelCancel || 'Cancel') + '</button>' +
+							'<button type="submit" class="btn btn-primary mr-2">' + (forumsCategoriesAdmin.dataset.labelSave) + '</button>' +
+							'<button type="button" class="btn btn-outline-secondary cancel-edit-btn">' + (forumsCategoriesAdmin.dataset.labelCancel) + '</button>' +
 						'</div>' +
 					'</div>';
 
@@ -186,7 +186,7 @@ if (forumsCategoriesAdmin) {
 						updateCategory(updateAction.href, cat.id, newName, newDesc)
 							.then(function(updatedCat) {
 								cat = updatedCat;
-								nameSpan.textContent = cat.categoryName || forumsCategoriesAdmin.dataset.labelUnnamed || 'Unnamed';
+								nameSpan.textContent = cat.categoryName || forumsCategoriesAdmin.dataset.labelUnnamed;
 								descSpan.textContent = cat.categoryDescription || '';
 								if (cat.categoryDescription && !descSpan.parentNode) {
 									infoDiv.appendChild(descSpan);
@@ -200,7 +200,7 @@ if (forumsCategoriesAdmin) {
 							})
 							.catch(function(err) {
 								console.error(err);
-								alert(forumsCategoriesAdmin.dataset.labelErrorUpdating || 'Error updating category.');
+								alert(forumsCategoriesAdmin.dataset.labelErrorUpdating);
 								saveBtn.disabled = false;
 								cancelBtn.disabled = false;
 							});
@@ -283,7 +283,7 @@ if (forumsCategoriesAdmin) {
 							</div>
 							<span id="forumsCatAdminConfirmHeading">${Liferay.Util.escapeHTML(confirmLabel)}</span>
 						</h1>
-						<button class="close btn btn-unstyled" type="button" id="forumsCatAdminConfirmClose" aria-label="${Liferay.Util.escapeHTML(forumsCategoriesAdmin.dataset.labelCancel || 'Cancel')}">
+						<button class="close btn btn-unstyled" type="button" id="forumsCatAdminConfirmClose" aria-label="${Liferay.Util.escapeHTML(forumsCategoriesAdmin.dataset.labelCancel)}">
 							<svg class="lexicon-icon lexicon-icon-times" focusable="false" role="presentation"><use href="${clayIconsUrl}#times"></use></svg>
 						</button>
 					</div>
@@ -293,7 +293,7 @@ if (forumsCategoriesAdmin) {
 					<div class="modal-footer">
 						<div class="modal-item-last">
 							<div class="btn-group-spaced" role="group">
-								<button class="btn btn-secondary" type="button" id="forumsCatAdminConfirmCancel">${Liferay.Util.escapeHTML(forumsCategoriesAdmin.dataset.labelCancel || 'Cancel')}</button>
+								<button class="btn btn-secondary" type="button" id="forumsCatAdminConfirmCancel">${Liferay.Util.escapeHTML(forumsCategoriesAdmin.dataset.labelCancel)}</button>
 								<button class="btn btn-danger" type="button" id="forumsCatAdminConfirmOk">${Liferay.Util.escapeHTML(confirmLabel)}</button>
 							</div>
 						</div>
@@ -329,8 +329,8 @@ if (forumsCategoriesAdmin) {
 	}
 
 	function deleteCategory(deleteUrl, id) {
-		var message = forumsCategoriesAdmin.dataset.labelConfirmDelete || 'Are you sure you want to delete this category?';
-		var confirmLabel = forumsCategoriesAdmin.dataset.labelDelete || 'Delete';
+		var message = forumsCategoriesAdmin.dataset.labelConfirmDelete;
+		var confirmLabel = forumsCategoriesAdmin.dataset.labelDelete;
 		showConfirmModal(message, confirmLabel, function() {
 			var url = deleteUrl || (portalURL + '/o/c/forumcategories/' + id);
 			Liferay.Util.fetch(url, {
@@ -339,11 +339,11 @@ if (forumsCategoriesAdmin) {
 			})
 			.then(function(r) {
 				if (r.ok) loadCategories();
-				else alert(forumsCategoriesAdmin.dataset.labelFailedDelete || 'Failed to delete category.');
+				else alert(forumsCategoriesAdmin.dataset.labelFailedDelete);
 			})
 			.catch(function(err) {
 				console.error(err);
-				alert(forumsCategoriesAdmin.dataset.labelErrorDelete || 'Error deleting category.');
+				alert(forumsCategoriesAdmin.dataset.labelErrorDelete);
 			});
 		});
 	}
@@ -351,7 +351,7 @@ if (forumsCategoriesAdmin) {
 	if (seedBtn) {
 		seedBtn.addEventListener('click', function() {
 			seedBtn.disabled = true;
-			seedBtn.textContent = forumsCategoriesAdmin.dataset.labelSeeding || 'Seeding...';
+			seedBtn.textContent = forumsCategoriesAdmin.dataset.labelSeeding;
 
 			var promises = defaultCategories.map(function(cat) {
 				return createCategory(cat.name, cat.desc, cat.erc).catch(function(e) { console.error(e); });
@@ -359,7 +359,7 @@ if (forumsCategoriesAdmin) {
 
 			Promise.all(promises).then(function() {
 				seedBtn.disabled = false;
-				seedBtn.textContent = forumsCategoriesAdmin.dataset.labelSeedDefault || 'Seed Default Categories';
+				seedBtn.textContent = forumsCategoriesAdmin.dataset.labelSeedDefault;
 				if (seedStatus) {
 					seedStatus.style.display = 'inline';
 					setTimeout(function() { seedStatus.style.display = 'none'; }, 3000);
@@ -387,7 +387,7 @@ if (forumsCategoriesAdmin) {
 			})
 			.catch(function(err) {
 				console.error(err);
-				alert(forumsCategoriesAdmin.dataset.labelErrorCreating || 'Error creating category.');
+				alert(forumsCategoriesAdmin.dataset.labelErrorCreating);
 				addBtn.disabled = false;
 			});
 		});
