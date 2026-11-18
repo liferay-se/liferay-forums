@@ -80,10 +80,6 @@
 		"value": "{\"en_US\": \"Unnamed Category\"}"
 	},
 	{
-		"key": "forums-unable-to-load-categories",
-		"value": "{\"en_US\": \"Unable to load categories.\"}"
-	},
-	{
 		"key": "forums-post-a-reply",
 		"value": "{\"en_US\": \"Post a Reply\"}"
 	},
@@ -162,10 +158,6 @@
 	{
 		"key": "forums-untitled-message",
 		"value": "{\"en_US\": \"Untitled Message\"}"
-	},
-	{
-		"key": "forums-posted-on",
-		"value": "{\"en_US\": \"Posted on: {0}\"}"
 	},
 	{
 		"key": "forums-upvote",
@@ -316,16 +308,8 @@
 		"value": "{\"en_US\": \"Flag has been dismissed.\"}"
 	},
 	{
-		"key": "forums-already-flagged",
-		"value": "{\"en_US\": \"You have already flagged this message.\"}"
-	},
-	{
 		"key": "forums-reported-by",
 		"value": "{\"en_US\": \"Reported by {0}\"}"
-	},
-	{
-		"key": "forums-x-flags",
-		"value": "{\"en_US\": \"{0} flags\"}"
 	},
 	{
 		"key": "forums-bans",
